@@ -6,13 +6,32 @@
 //
 
 import SwiftUI
+import Kingfisher
+
+struct IconViewField: View {
+    var iconName: String = "Hello"
+    @State var textFieldValue = "keyboard"
+
+    var body: some View {
+        VStack {
+            TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: $textFieldValue)
+            Text(textFieldValue).bold().font(.largeTitle)
+            Image(systemName: textFieldValue.lowercased()).frame(width: 100, height: 100, alignment: Alignment.center)
+        }
+    }
+}
 
 struct ContentView: View {
     
+    private let imageUrl: String = "https://picsum.photos/400/400"
+    
     var body: some View  {
-        sampleVerticalHorizontal()
+   CircleTextImageView(title: "test image", imageUrl: imageUrl)
     }
     
+    
+    //MARK: Test
+    //TODO: Fix here
     fileprivate func sampleVerticalHorizontal() -> some View {
         return VStack(alignment: .center, content: {
             AsyncImage(url: URL(string: "https://picsum.photos/400/300")
@@ -20,7 +39,9 @@ struct ContentView: View {
             Text(verbatim: "Username")
             HStack(content: {
                 TextField(/*@START_MENU_TOKEN@*/"Placeholder"/*@END_MENU_TOKEN@*/, text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/).textFieldStyle(.roundedBorder.self)
-                Text("Data")
+                Image(systemName: "magnifyingglass").foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/) // Sf symbols üzerinden icon ismine bakılıp systemName parametresine ekleniyor
+                Text("Search").background(Color("random_color"))
+
             }
             ).padding()
         })
@@ -30,6 +51,7 @@ struct ContentView: View {
             content: {
                 AsyncImage(url: URL(string: "https://picsum.photos/400/300"))
                 Text("Test")
+                
         })
     }
 }
